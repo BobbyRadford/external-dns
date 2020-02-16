@@ -163,6 +163,14 @@ func main() {
 		p, err = provider.NewVinylDNSProvider(domainFilter, zoneIDFilter, cfg.DryRun)
 	case "cloudflare":
 		p, err = provider.NewCloudFlareProvider(domainFilter, zoneIDFilter, cfg.CloudflareZonesPerPage, cfg.CloudflareProxied, cfg.DryRun)
+	case "ibm-cis":
+		p, err = provider.NewIBMProvider(provider.IBMProviderConfig{
+			CRN:              cfg.IBMCloudInternetServicesCRN,
+			DomainFilter:     domainFilter,
+			ZoneIDFilter:     zoneIDFilter,
+			ProxiedByDefault: cfg.IBMProxied,
+			DryRun:           cfg.DryRun,
+		})
 	case "rcodezero":
 		p, err = provider.NewRcodeZeroProvider(domainFilter, cfg.DryRun, cfg.RcodezeroTXTEncrypt)
 	case "google":
